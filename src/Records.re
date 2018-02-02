@@ -1,0 +1,1 @@
+type item = {name: string};

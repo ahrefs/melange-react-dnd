@@ -1,0 +1,19 @@
+{
+  "name": "bs-react-dnd",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": [
+        {
+          "dir": "ReactDND"
+        }
+      ]
+    }
+  ],
+  "bs-dependencies": ["reason-react", "bs-jest"],
+  "reason": {
+    "react-jsx": 2
+  },
+  "bsc-flags": ["-bs-super-errors"],
+  "refmt": 3
+}
