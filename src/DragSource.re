@@ -6,7 +6,7 @@ open Core;
 type monitor = {
   .
   "getItem": [@bs.meth] (unit => Js.nullable(dndItem)),
-  "getDropResult": [@bs.meth] (unit => dndItem)
+  "getDropResult": [@bs.meth] (unit => Js.nullable(dndItem))
 };
 
 module MakeSpec = (Config: {type props;}) => {
