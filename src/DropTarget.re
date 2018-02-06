@@ -5,6 +5,7 @@ open Core;
 
 type monitor = {
   .
+  "getItem": [@bs.meth] (unit => option(dndItem)),
   "isOver": [@bs.meth] (unit => Js.boolean),
   "canDrop": [@bs.meth] (unit => Js.boolean)
 };
@@ -59,10 +60,6 @@ module Make = (Config: MakeConfig) => {
   let enhanced =
     dropTarget(Config.itemType, Config.spec, Config.collect, jsComponent);
   /* Convert JS => Reason */
-  let make = (children: children) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass=enhanced,
-      ~props=Js.Obj.empty(),
-      children
-    );
+  let make = (~props=Js.Obj.empty(), children: children) =>
+    ReasonReact.wrapJsForReason(~reactClass=enhanced, ~props, children);
 };

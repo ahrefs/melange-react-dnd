@@ -57,6 +57,6 @@ module Make = (Config: MakeConfig) => {
   let enhanced =
     dragSource(Config.itemType, Config.spec, Config.collect, jsComponent);
   /* Convert JS => Reason */
-  let make = (~props, children: children) =>
+  let make = (~props=Js.Obj.empty(), children: children) =>
     ReasonReact.wrapJsForReason(~reactClass=enhanced, ~props, children);
 };
