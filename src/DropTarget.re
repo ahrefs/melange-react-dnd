@@ -5,7 +5,7 @@ open Core;
 
 type monitor = {
   .
-  "getItem": [@bs.meth] (unit => option(dndItem)),
+  "getItem": [@bs.meth] (unit => dndItem),
   "isOver": [@bs.meth] (unit => Js.boolean),
   "canDrop": [@bs.meth] (unit => Js.boolean)
 };

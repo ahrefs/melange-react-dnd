@@ -5,8 +5,8 @@ open Core;
 
 type monitor = {
   .
-  "getItem": [@bs.meth] (unit => option(dndItem)),
-  "getDropResult": [@bs.meth] (unit => option(dndItem))
+  "getItem": [@bs.meth] (unit => dndItem),
+  "getDropResult": [@bs.meth] (unit => dndItem)
 };
 
 module MakeSpec = (Config: {type props;}) => {
