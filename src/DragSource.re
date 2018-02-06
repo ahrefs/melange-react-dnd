@@ -12,13 +12,13 @@ type monitor = {
 module MakeSpec = (Config: {type props;}) => {
   type t = {
     .
-    "beginDrag": unit => dndItem,
+    "beginDrag": Config.props => dndItem,
     "endDrag": (Config.props, monitor) => unit
   };
   [@bs.obj]
   external make :
     (
-      ~beginDrag: unit => dndItem=?,
+      ~beginDrag: Config.props => dndItem=?,
       ~endDrag: (Config.props, monitor) => unit=?,
       unit
     ) =>
