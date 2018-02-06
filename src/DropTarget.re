@@ -10,8 +10,22 @@ type monitor = {
 };
 
 module MakeSpec = (Config: {type props;}) => {
-  type t = {. "drop": Config.props => dndItem};
-  [@bs.obj] external make : (~drop: Config.props => dndItem=?, unit) => t = "";
+  type t = {
+    .
+    "drop": (Config.props, monitor) => dndItem,
+    "hover": (Config.props, monitor) => unit,
+    "canDrop": (Config.props, monitor) => bool
+  };
+  [@bs.obj]
+  external make :
+    (
+      ~drop: (Config.props, monitor) => dndItem=?,
+      ~hover: (Config.props, monitor) => unit=?,
+      ~canDrop: (Config.props, monitor) => bool=?,
+      unit
+    ) =>
+    t =
+    "";
 };
 
 module type MakeConfig = {
