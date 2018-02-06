@@ -13,15 +13,15 @@ type monitor = {
 module MakeSpec = (Config: {type props;}) => {
   type t = {
     .
-    "drop": (Config.props, monitor, ReasonReact.reactElement) => dndItem,
-    "hover": (Config.props, monitor, ReasonReact.reactElement) => unit,
+    "drop": (Config.props, monitor, ReasonReact.reactRef) => dndItem,
+    "hover": (Config.props, monitor, ReasonReact.reactRef) => unit,
     "canDrop": (Config.props, monitor) => bool
   };
   [@bs.obj]
   external make :
     (
-      ~drop: (Config.props, monitor, ReasonReact.reactElement) => dndItem=?,
-      ~hover: (Config.props, monitor, ReasonReact.reactElement) => unit=?,
+      ~drop: (Config.props, monitor, ReasonReact.reactRef) => dndItem=?,
+      ~hover: (Config.props, monitor, ReasonReact.reactRef) => unit=?,
       ~canDrop: (Config.props, monitor) => bool=?,
       unit
     ) =>
