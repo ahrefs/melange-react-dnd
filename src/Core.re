@@ -13,6 +13,6 @@ type dndItem = {. "name": string};
 
 type coordinates = {
   .
-  "x": float,
-  "y": float
+  "x": int,
+  "y": int
 };
