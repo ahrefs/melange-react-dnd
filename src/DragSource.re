@@ -5,7 +5,7 @@ open Core;
 
 type monitor = {
   .
-  "getItem": [@bs.meth] (unit => dndItem),
+  "getItem": [@bs.meth] (unit => Js.nullable(dndItem)),
   "getDropResult": [@bs.meth] (unit => dndItem)
 };
 
