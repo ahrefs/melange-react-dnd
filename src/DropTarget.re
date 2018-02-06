@@ -10,7 +10,7 @@ type monitor = {
 };
 
 module MakeSpec = (Config: {type props;}) => {
-  type t = {. "drop": unit => dndItem};
+  type t = {. "drop": Config.props => dndItem};
   [@bs.obj] external make : (~drop: Config.props => dndItem=?, unit) => t = "";
 };
 
