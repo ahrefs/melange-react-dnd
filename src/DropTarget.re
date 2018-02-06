@@ -5,9 +5,16 @@ open Core;
 
 type monitor = {
   .
-  "getItem": [@bs.meth] (unit => Js.nullable(dndItem)),
+  "canDrop": [@bs.meth] (unit => Js.boolean),
   "isOver": [@bs.meth] (unit => Js.boolean),
-  "canDrop": [@bs.meth] (unit => Js.boolean)
+  "getItem": [@bs.meth] (unit => Js.nullable(dndItem)),
+  "getInitialClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
+  "getInitialSourceClientOffset":
+    [@bs.meth] (unit => Js.nullable(coordinates)),
+  "getClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
+  "getDifferenceFromInitialOffset":
+    [@bs.meth] (unit => Js.nullable(coordinates)),
+  "getSourceClientOffset": [@bs.meth] (unit => Js.nullable(coordinates))
 };
 
 module MakeSpec = (Config: {type props;}) => {

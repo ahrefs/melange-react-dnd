@@ -10,3 +10,9 @@ type connect = {
 };
 
 type dndItem = {. "name": string};
+
+type coordinates = {
+  .
+  "x": float,
+  "y": float
+};
