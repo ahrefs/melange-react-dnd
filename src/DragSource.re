@@ -5,6 +5,7 @@ open Core;
 
 type monitor = {
   .
+  "isDragging": [@bs.meth] (unit => Js.boolean),
   "getItem": [@bs.meth] (unit => Js.nullable(dndItem)),
   "getDropResult": [@bs.meth] (unit => Js.nullable(dndItem))
 };
