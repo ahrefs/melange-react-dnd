@@ -3,24 +3,30 @@
  */
 open Core;
 
-type monitor = {
-  .
-  "isDragging": [@bs.meth] (unit => Js.boolean),
-  "getItem": [@bs.meth] (unit => Js.nullable(dndItem)),
-  "getDropResult": [@bs.meth] (unit => Js.nullable(dndItem))
-};
-
-module MakeSpec = (Config: {type props;}) => {
+module MakeSpec = (Config: {type props; type dndItem;}) => {
+  type monitor = {
+    .
+    "isDragging": [@bs.meth] (unit => Js.boolean),
+    "getItem": [@bs.meth] (unit => Js.nullable(Config.dndItem)),
+    "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dndItem))
+  };
   type t = {
     .
-    "beginDrag": Config.props => dndItem,
-    "endDrag": (Config.props, monitor) => unit
+    "beginDrag":
+      (Config.props, monitor, ReasonReact.reactRef) => Config.dndItem,
+    "endDrag": (Config.props, monitor, ReasonReact.reactRef) => unit,
+    "canDrag": (Config.props, monitor) => bool,
+    "isDragging": (Config.props, monitor) => bool
   };
   [@bs.obj]
   external make :
     (
-      ~beginDrag: Config.props => dndItem=?,
-      ~endDrag: (Config.props, monitor) => unit=?,
+      ~beginDrag: (Config.props, monitor, ReasonReact.reactRef) =>
+                  Config.dndItem
+                    =?,
+      ~endDrag: (Config.props, monitor, ReasonReact.reactRef) => unit=?,
+      ~canDrag: (Config.props, monitor) => bool=?,
+      ~isDragging: (Config.props, monitor) => unit=?,
       unit
     ) =>
     t =

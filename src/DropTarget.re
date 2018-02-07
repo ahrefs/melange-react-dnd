@@ -3,31 +3,30 @@
  */
 open Core;
 
-type monitor = {
-  .
-  "canDrop": [@bs.meth] (unit => Js.boolean),
-  "isOver": [@bs.meth] (unit => Js.boolean),
-  "getItem": [@bs.meth] (unit => Js.nullable(dndItem)),
-  "getInitialClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
-  "getInitialSourceClientOffset":
-    [@bs.meth] (unit => Js.nullable(coordinates)),
-  "getClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
-  "getDifferenceFromInitialOffset":
-    [@bs.meth] (unit => Js.nullable(coordinates)),
-  "getSourceClientOffset": [@bs.meth] (unit => Js.nullable(coordinates))
-};
-
-module MakeSpec = (Config: {type props;}) => {
+module MakeSpec = (Config: {type props; type dndItem;}) => {
+  type monitor = {
+    .
+    "canDrop": [@bs.meth] (unit => Js.boolean),
+    "isOver": [@bs.meth] (unit => Js.boolean),
+    "getItem": [@bs.meth] (unit => Js.nullable(Config.dndItem)),
+    "getInitialClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
+    "getInitialSourceClientOffset":
+      [@bs.meth] (unit => Js.nullable(coordinates)),
+    "getClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
+    "getDifferenceFromInitialOffset":
+      [@bs.meth] (unit => Js.nullable(coordinates)),
+    "getSourceClientOffset": [@bs.meth] (unit => Js.nullable(coordinates))
+  };
   type t = {
     .
-    "drop": (Config.props, monitor, ReasonReact.reactRef) => dndItem,
+    "drop": (Config.props, monitor, ReasonReact.reactRef) => Config.dndItem,
     "hover": (Config.props, monitor, ReasonReact.reactRef) => unit,
     "canDrop": (Config.props, monitor) => bool
   };
   [@bs.obj]
   external make :
     (
-      ~drop: (Config.props, monitor, ReasonReact.reactRef) => dndItem=?,
+      ~drop: (Config.props, monitor, ReasonReact.reactRef) => Config.dndItem=?,
       ~hover: (Config.props, monitor, ReasonReact.reactRef) => unit=?,
       ~canDrop: (Config.props, monitor) => bool=?,
       unit

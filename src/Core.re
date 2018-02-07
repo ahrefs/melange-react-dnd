@@ -9,8 +9,6 @@ type connect = {
   "dropTarget": [@bs.meth] (unit => wrapper)
 };
 
-type dndItem = {. "name": string};
-
 type coordinates = {
   .
   "x": int,
