@@ -26,7 +26,7 @@ module MakeSpec = (Config: {type props; type dndItem;}) => {
                     =?,
       ~endDrag: (Config.props, monitor, ReasonReact.reactRef) => unit=?,
       ~canDrag: (Config.props, monitor) => bool=?,
-      ~isDragging: (Config.props, monitor) => unit=?,
+      ~isDragging: (Config.props, monitor) => bool=?,
       unit
     ) =>
     t =
