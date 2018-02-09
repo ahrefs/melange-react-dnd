@@ -7,7 +7,7 @@ module MakeSpec = (Config: {type props; type dndItem;}) => {
   type monitor = {
     .
     "canDrop": [@bs.meth] (unit => Js.boolean),
-    "isOver": [@bs.meth] ({. "shallow": bool} => Js.boolean),
+    "isOver": [@bs.meth] ({. "shallow": Js.boolean} => Js.boolean),
     "getItem": [@bs.meth] (unit => Js.nullable(Config.dndItem)),
     "getInitialClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
     "getInitialSourceClientOffset":
