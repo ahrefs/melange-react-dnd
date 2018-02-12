@@ -6,6 +6,7 @@ type wrapper =
 type connect = {
   .
   "dragSource": [@bs.meth] (unit => wrapper),
+  "dragPreview": [@bs.meth] (unit => wrapper),
   "dropTarget": [@bs.meth] (unit => wrapper)
 };
 
