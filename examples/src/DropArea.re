@@ -1,6 +1,7 @@
 module DropTargetSpec =
   ReactDND.DropTarget.MakeSpec(
     {
+      type dndItem = {. "name": string};
       type props = unit;
     }
   );
@@ -16,14 +17,14 @@ module DropTargetWrapper =
         "canDrop": bool
       };
       type collect =
-        (ReactDND.Core.connect, ReactDND.DropTarget.monitor) => collectedProps;
+        (ReactDND.Core.connect, DropTargetSpec.monitor) => collectedProps;
       let itemType: string = "BOX";
       let spec: spec =
-        DropTargetSpec.make(~drop=_props => {"name": "DropArea"}, ());
+        DropTargetSpec.make(~drop=(_, _, _) => {"name": "DropArea"}, ());
       let collect: collect =
         (connect, monitor) => {
           "connectDropTarget": connect##dropTarget(),
-          "isOver": Js.to_bool(monitor##isOver()),
+          "isOver": Js.to_bool(monitor##isOver({"shallow": Js.false_})),
           "canDrop": Js.to_bool(monitor##canDrop())
         };
     }

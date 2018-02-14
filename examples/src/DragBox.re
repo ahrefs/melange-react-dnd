@@ -1,6 +1,7 @@
 module DragSourceSpec =
   ReactDND.DragSource.MakeSpec(
     {
+      type dndItem = {. "name": string};
       type props = {. "onEndDrag": [@bs.meth] (unit => unit)};
     }
   );
@@ -12,11 +13,11 @@ module DragSourceWrapper =
       type spec = DragSourceSpec.t;
       let spec: spec =
         DragSourceSpec.make(
-          ~beginDrag=() => {"name": "DragBox"},
+          ~beginDrag=(_, _, _) => {"name": "DragBox"},
           ~endDrag=
-            (props, monitor) => {
+            (props, monitor, _) => {
               /* let item = monitor##getItem(); */
-              let dropResult = monitor##getDropResult();
+              let dropResult = Js.toOption(monitor##getDropResult());
               switch dropResult {
               | Some(_) => props##onEndDrag()
               | None => ()
@@ -27,7 +28,7 @@ module DragSourceWrapper =
         );
       type collectedProps = {. "connectDragSource": ReactDND.Core.wrapper};
       type collect =
-        (ReactDND.Core.connect, ReactDND.DragSource.monitor) => collectedProps;
+        (ReactDND.Core.connect, DragSourceSpec.monitor) => collectedProps;
       let collect: collect =
         (connect, _monitor) => {"connectDragSource": connect##dragSource()};
     }
