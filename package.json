@@ -1,6 +1,6 @@
 {
   "name": "bs-react-dnd",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "start": "npm run bs:watch",
     "test": "npm run bs:build",
