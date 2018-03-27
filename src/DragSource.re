@@ -9,14 +9,14 @@ type connector = {
   "dragPreview": [@bs.meth] (unit => wrapper),
 };
 
-module MakeSpec = (Config: {type props; type dndItem;}) => {
+module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
   type monitor = {
     .
     "canDrag": [@bs.meth] (unit => Js.boolean),
     "isDragging": [@bs.meth] (unit => Js.boolean),
     "getItemType": [@bs.meth] (unit => Js.nullable(Core.identifier)),
-    "getItem": [@bs.meth] (unit => Js.nullable(Config.dndItem)),
-    "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dndItem)),
+    "getItem": [@bs.meth] (unit => Js.nullable(Config.dragItem)),
+    "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dropItem)),
     "didDrop": [@bs.meth] (unit => Js.boolean),
     "getInitialClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
     "getInitialSourceClientOffset":
@@ -29,7 +29,7 @@ module MakeSpec = (Config: {type props; type dndItem;}) => {
   type t = {
     .
     "beginDrag":
-      (Config.props, monitor, ReasonReact.reactRef) => Config.dndItem,
+      (Config.props, monitor, ReasonReact.reactRef) => Config.dragItem,
     "endDrag": (Config.props, monitor, ReasonReact.reactRef) => unit,
     "canDrag": (Config.props, monitor) => bool,
     "isDragging": (Config.props, monitor) => bool,
@@ -38,8 +38,7 @@ module MakeSpec = (Config: {type props; type dndItem;}) => {
   external make :
     (
       ~beginDrag: (Config.props, monitor, ReasonReact.reactRef) =>
-                  Config.dndItem
-                    =?,
+                  Config.dragItem,
       ~endDrag: (Config.props, monitor, ReasonReact.reactRef) => unit=?,
       ~canDrag: (Config.props, monitor) => bool=?,
       ~isDragging: (Config.props, monitor) => bool=?,

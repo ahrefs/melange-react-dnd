@@ -1,7 +1,8 @@
 module DropTargetSpec =
   ReactDND.DropTarget.MakeSpec(
     {
-      type dndItem = {. "name": string};
+      type dragItem = unit;
+      type dropItem = unit;
       type props = unit;
     },
   );
@@ -9,7 +10,9 @@ module DropTargetSpec =
 module DropTargetWrapper =
   ReactDND.DropTarget.Make(
     {
+      let itemType: ReactDND.Core.identifier = "BOX";
       type spec = DropTargetSpec.t;
+      let spec: spec = DropTargetSpec.make();
       type collectedProps = {
         .
         "connectDropTarget": ReactDND.Core.wrapper,
@@ -19,9 +22,6 @@ module DropTargetWrapper =
       type collect =
         (ReactDND.DropTarget.connector, DropTargetSpec.monitor) =>
         collectedProps;
-      let itemType: string = "BOX";
-      let spec: spec =
-        DropTargetSpec.make(~drop=(_, _, _) => {"name": "DropArea"}, ());
       let collect: collect =
         (connect, monitor) => {
           "connectDropTarget": connect##dropTarget(),

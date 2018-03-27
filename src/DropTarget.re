@@ -5,14 +5,14 @@ open Core;
 
 type connector = {. "dropTarget": [@bs.meth] (unit => wrapper)};
 
-module MakeSpec = (Config: {type props; type dndItem;}) => {
+module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
   type monitor = {
     .
     "canDrop": [@bs.meth] (unit => Js.boolean),
     "isOver": [@bs.meth] ({. "shallow": Js.boolean} => Js.boolean),
     "getItemType": [@bs.meth] (unit => Js.nullable(Core.identifier)),
-    "getItem": [@bs.meth] (unit => Js.nullable(Config.dndItem)),
-    "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dndItem)),
+    "getItem": [@bs.meth] (unit => Js.nullable(Config.dragItem)),
+    "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dropItem)),
     "didDrop": [@bs.meth] (unit => Js.boolean),
     "getInitialClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
     "getInitialSourceClientOffset":
@@ -24,14 +24,14 @@ module MakeSpec = (Config: {type props; type dndItem;}) => {
   };
   type t = {
     .
-    "drop": (Config.props, monitor, ReasonReact.reactRef) => Config.dndItem,
+    "drop": (Config.props, monitor, ReasonReact.reactRef) => Config.dropItem,
     "hover": (Config.props, monitor, ReasonReact.reactRef) => unit,
     "canDrop": (Config.props, monitor) => bool,
   };
   [@bs.obj]
   external make :
     (
-      ~drop: (Config.props, monitor, ReasonReact.reactRef) => Config.dndItem=?,
+      ~drop: (Config.props, monitor, ReasonReact.reactRef) => Config.dropItem=?,
       ~hover: (Config.props, monitor, ReasonReact.reactRef) => unit=?,
       ~canDrop: (Config.props, monitor) => bool=?,
       unit
