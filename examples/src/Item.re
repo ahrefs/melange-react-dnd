@@ -3,7 +3,7 @@ module DragSourceSpec =
     {
       type dndItem = {. "name": string};
       type props = {. "onEndDrag": [@bs.meth] (unit => unit)};
-    }
+    },
   );
 
 module DragSourceWrapper =
@@ -13,28 +13,29 @@ module DragSourceWrapper =
       type spec = DragSourceSpec.t;
       let spec: spec =
         DragSourceSpec.make(
-          ~beginDrag=(_, _, _) => {"name": "DragBox"},
+          ~beginDrag=(_, _, _) => {"name": "Item"},
           ~endDrag=
             (props, monitor, _) => {
               /* let item = monitor##getItem(); */
               let dropResult = Js.toOption(monitor##getDropResult());
-              switch dropResult {
+              switch (dropResult) {
               | Some(_) => props##onEndDrag()
               | None => ()
               };
               ();
             },
-          ()
+          (),
         );
       type collectedProps = {. "connectDragSource": ReactDND.Core.wrapper};
       type collect =
-        (ReactDND.Core.connect, DragSourceSpec.monitor) => collectedProps;
+        (ReactDND.DragSource.connector, DragSourceSpec.monitor) =>
+        collectedProps;
       let collect: collect =
         (connect, _monitor) => {"connectDragSource": connect##dragSource()};
-    }
+    },
   );
 
-let component = ReasonReact.statelessComponent("DragBox");
+let component = ReasonReact.statelessComponent("Item");
 
 let make = (~name: string, ~onEndDrag: unit => unit, _children) => {
   ...component,
@@ -43,10 +44,10 @@ let make = (~name: string, ~onEndDrag: unit => unit, _children) => {
       ...(
            (~collectedProps) =>
              collectedProps##connectDragSource(
-               <div className="DragBox">
+               <div className="Item">
                  (ReasonReact.stringToElement(name))
-               </div>
+               </div>,
              )
          )
-    </DragSourceWrapper>
+    </DragSourceWrapper>,
 };

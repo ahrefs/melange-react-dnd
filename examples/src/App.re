@@ -1,3 +1,5 @@
+open ReactDND;
+
 type action =
   | Add(string);
 
@@ -8,37 +10,38 @@ let component = ReasonReact.reducerComponent("App");
 let draggable: array(Records.item) = [|
   {name: "apple"},
   {name: "banana"},
-  {name: "orange"}
+  {name: "orange"},
 |];
 
 let make = _children => {
   ...component,
   initialState: () => {data: [||]},
   reducer: (action, state) =>
-    switch action {
+    switch (action) {
     | Add(name) =>
-      ReasonReact.Update({data: Array.concat([state.data, [|{name: name}|]])})
+      ReasonReact.Update({
+        data: Array.concat([state.data, [|{name: name}|]]),
+      })
     },
   render: self =>
-    <ReactDND.DragDropContextProvider
-      backend=ReactDND.DragDropContextProvider.html5backend>
+    <DragDropContextProvider backend=DnDBackend.html5>
       <div className="App">
-        <div className="App-main"> <DropArea data=self.state.data /> </div>
+        <div className="App-main"> <Basket data=self.state.data /> </div>
         <div className="App-sidebar">
           (
             ReasonReact.arrayToElement(
               Array.map(
                 (item: Records.item) =>
-                  <DragBox
+                  <Item
                     key=item.name
                     name=item.name
                     onEndDrag=(() => self.send(Add(item.name)))
                   />,
-                draggable
-              )
+                draggable,
+              ),
             )
           )
         </div>
       </div>
-    </ReactDND.DragDropContextProvider>
+    </DragDropContextProvider>,
 };

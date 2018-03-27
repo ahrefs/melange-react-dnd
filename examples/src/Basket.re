@@ -3,7 +3,7 @@ module DropTargetSpec =
     {
       type dndItem = {. "name": string};
       type props = unit;
-    }
+    },
   );
 
 module DropTargetWrapper =
@@ -14,10 +14,11 @@ module DropTargetWrapper =
         .
         "connectDropTarget": ReactDND.Core.wrapper,
         "isOver": bool,
-        "canDrop": bool
+        "canDrop": bool,
       };
       type collect =
-        (ReactDND.Core.connect, DropTargetSpec.monitor) => collectedProps;
+        (ReactDND.DropTarget.connector, DropTargetSpec.monitor) =>
+        collectedProps;
       let itemType: string = "BOX";
       let spec: spec =
         DropTargetSpec.make(~drop=(_, _, _) => {"name": "DropArea"}, ());
@@ -25,12 +26,12 @@ module DropTargetWrapper =
         (connect, monitor) => {
           "connectDropTarget": connect##dropTarget(),
           "isOver": Js.to_bool(monitor##isOver({"shallow": Js.false_})),
-          "canDrop": Js.to_bool(monitor##canDrop())
+          "canDrop": Js.to_bool(monitor##canDrop()),
         };
-    }
+    },
   );
 
-let component = ReasonReact.statelessComponent("DropArea");
+let component = ReasonReact.statelessComponent("Basket");
 
 let make = (~data: array(Records.item), _children) => {
   ...component,
@@ -40,16 +41,18 @@ let make = (~data: array(Records.item), _children) => {
            (~collectedProps) =>
              collectedProps##connectDropTarget(
                <div
-                 className="DropArea"
+                 className="Basket"
                  style=(
                    ReactDOMRe.Style.make(
                      ~backgroundColor=
                        collectedProps##isOver && collectedProps##canDrop ?
                          "lightgreen" : "white",
-                     ()
+                     (),
                    )
                  )>
-                 <p> (ReasonReact.stringToElement("items in the basket:")) </p>
+                 <p>
+                   (ReasonReact.stringToElement("items in the basket:"))
+                 </p>
                  <ul>
                    (
                      ReasonReact.arrayToElement(
@@ -58,13 +61,13 @@ let make = (~data: array(Records.item), _children) => {
                            <li key=item.name>
                              (ReasonReact.stringToElement(item.name))
                            </li>,
-                         data
-                       )
+                         data,
+                       ),
                      )
                    )
                  </ul>
-               </div>
+               </div>,
              )
          )
-    </DropTargetWrapper>
+    </DropTargetWrapper>,
 };

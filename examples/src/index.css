@@ -27,7 +27,7 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.DropArea {
+.Basket {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -40,7 +40,7 @@ body {
   border: 1px solid black;
 }
 
-.DragBox {
+.Item {
   display: flex;
   align-items: center;
   justify-content: center;
