@@ -10,7 +10,7 @@ module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
     .
     "canDrop": [@bs.meth] (unit => Js.boolean),
     "isOver": [@bs.meth] ({. "shallow": Js.boolean} => Js.boolean),
-    "getItemType": [@bs.meth] (unit => Js.nullable(Core.identifier)),
+    "getItemType": [@bs.meth] (unit => Js.nullable(Core.itemType)),
     "getItem": [@bs.meth] (unit => Js.nullable(Config.dragItem)),
     "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dropItem)),
     "didDrop": [@bs.meth] (unit => Js.boolean),
@@ -44,7 +44,7 @@ module type MakeConfig = {
   type spec;
   type collectedProps;
   type collect;
-  let itemType: identifier;
+  let itemType: itemType;
   let spec: spec;
   let collect: collect;
 };
@@ -53,7 +53,7 @@ module Make = (Config: MakeConfig) => {
   external convertToCollectedProps : Js.t({..}) => Config.collectedProps =
     "%identity";
   [@bs.module "react-dnd"]
-  external dropTarget : (identifier, Config.spec, Config.collect) => hoc =
+  external dropTarget : (itemType, Config.spec, Config.collect) => hoc =
     "DropTarget";
   type children =
     (~collectedProps: Config.collectedProps) => ReasonReact.reactElement;

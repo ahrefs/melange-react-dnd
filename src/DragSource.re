@@ -14,7 +14,7 @@ module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
     .
     "canDrag": [@bs.meth] (unit => Js.boolean),
     "isDragging": [@bs.meth] (unit => Js.boolean),
-    "getItemType": [@bs.meth] (unit => Js.nullable(Core.identifier)),
+    "getItemType": [@bs.meth] (unit => Js.nullable(Core.itemType)),
     "getItem": [@bs.meth] (unit => Js.nullable(Config.dragItem)),
     "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dropItem)),
     "didDrop": [@bs.meth] (unit => Js.boolean),
@@ -52,7 +52,7 @@ module type MakeConfig = {
   type spec;
   type collectedProps;
   type collect;
-  let itemType: identifier;
+  let itemType: itemType;
   let spec: spec;
   let collect: collect;
 };
@@ -61,7 +61,7 @@ module Make = (Config: MakeConfig) => {
   external convertToCollectedProps : Js.t({..}) => Config.collectedProps =
     "%identity";
   [@bs.module "react-dnd"]
-  external dragSource : (identifier, Config.spec, Config.collect) => hoc =
+  external dragSource : (itemType, Config.spec, Config.collect) => hoc =
     "DragSource";
   type children =
     (~collectedProps: Config.collectedProps) => ReasonReact.reactElement;

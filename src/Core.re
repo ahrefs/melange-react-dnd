@@ -4,7 +4,7 @@ type wrapper =
   [@bs.meth] (ReasonReact.reactElement => ReasonReact.reactElement);
 
 /* The React DnD docs say that this can also be the ES6 Symbol. */
-type identifier = string;
+type itemType = string;
 
 type coordinates = {
   .
