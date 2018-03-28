@@ -1,6 +1,26 @@
 {
   "name": "bs-react-dnd",
   "version": "1.0.0",
+  "description": "Reason bindings for react-dnd",
+  "author": "ahrefs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahrefs/bs-react-dnd.git"
+  },
+  "homepage": "https://github.com/ahrefs/bs-react-dnd#readme",
+  "bugs": {
+    "url": "https://github.com/ahrefs/bs-react-dnd/issues"
+  },
+  "keywords": [
+    "react",
+    "reason-react",
+    "reason",
+    "reasonml",
+    "bucklescript",
+    "drag-and-drop",
+    "dnd"
+  ],
   "scripts": {
     "prestart": "npm install && bsb -clean-world",
     "start": "npm run bs:watch",

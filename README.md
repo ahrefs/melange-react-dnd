@@ -8,6 +8,21 @@
 
 Feel free to create an issue or PR.
 
+## Installation
+
+```sh
+npm install --save bs-react-dnd
+```
+
+Then add `bs-react-dnd` to `bs-dependencies` in your `bsconfig.json`:
+
+```js
+{
+  ...
+  "bs-dependencies": ["bs-react-dnd"]
+}
+```
+
 ## TODO
 
 * [ ] DragLayer
