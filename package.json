@@ -1,6 +1,6 @@
 {
   "name": "bs-react-dnd",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "scripts": {
     "prestart": "npm install && bsb -clean-world",
     "start": "npm run bs:watch",
