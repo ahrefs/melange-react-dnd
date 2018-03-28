@@ -40,16 +40,17 @@ module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
     "";
 };
 
-module type MakeConfig = {
-  type spec;
-  type collectedProps;
-  type collect;
-  let itemType: itemType;
-  let spec: spec;
-  let collect: collect;
-};
-
-module Make = (Config: MakeConfig) => {
+module Make =
+       (
+         Config: {
+           type spec;
+           type collectedProps;
+           type collect;
+           let itemType: itemType;
+           let spec: spec;
+           let collect: collect;
+         },
+       ) => {
   external convertToCollectedProps : Js.t({..}) => Config.collectedProps =
     "%identity";
   [@bs.module "react-dnd"]

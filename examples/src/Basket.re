@@ -36,6 +36,7 @@ let component = ReasonReact.statelessComponent("Basket");
 let make = (~data: array(Records.item), _children) => {
   ...component,
   render: _self =>
+    /* need to be very carefull when passing `props` isn't annotated, this has to be the same as DropTargetSpec.props */
     <DropTargetWrapper>
       ...(
            (~collectedProps) =>

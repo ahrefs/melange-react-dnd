@@ -36,6 +36,7 @@ let component = ReasonReact.statelessComponent("Item");
 let make = (~name: string, ~onEndDrag: unit => unit, _children) => {
   ...component,
   render: _self =>
+    /* need to be very carefull when passing `props` isn't annotated, this has to be the same as DragSourceSpec.props */
     <DragSourceWrapper props={"onEndDrag": onEndDrag}>
       ...(
            (~collectedProps) =>
