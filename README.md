@@ -26,7 +26,7 @@ Then add `bs-react-dnd` to `bs-dependencies` in your `bsconfig.json`:
 ## TODO
 
 * [ ] DragLayer
-* [ ] Recreate some examples from react-dnd docs
+* [x] Recreate some examples from react-dnd docs
 
 ## Usage
 

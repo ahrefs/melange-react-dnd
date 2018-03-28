@@ -1,7 +1,7 @@
 {
   "name": "bs-react-dnd-examples",
   "sources": ["src"],
-  "bs-dependencies": ["reason-react", "bs-jest", "bs-react-dnd"],
+  "bs-dependencies": ["reason-react", "bs-jest", "bs-react-dnd", "rationale"],
   "reason": {
     "react-jsx": 2
   },
