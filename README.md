@@ -4,13 +4,18 @@
 
 ## Status
 
-🚧 This is a WIP, not everything is supported yet. 🚧
+🚧 Not everything is supported yet. 🚧
 
 Feel free to create an issue or PR.
 
+## TODO
+
+* [ ] DragLayer
+* [ ] Recreate some examples from react-dnd docs
+
 ## Usage
 
-Please take a look at [examples](https://github.com/liubko/bs-react-dnd/tree/master/examples).
+Please take a look at [examples](https://github.com/ahrefs/bs-react-dnd/tree/master/examples).
 To run demo:
 
 ```sh
