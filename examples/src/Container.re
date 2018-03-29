@@ -41,7 +41,7 @@ let make = _children => {
       };
     },
   render: self =>
-    <ReactDND.DragDropContextProvider backend=DnDBackend.html5>
+    <ReactDND.DragDropContextProvider backend=Backend.html5>
       <div style=(ReactDOMRe.Style.make(~width="400", ()))>
         (
           self.state.cards

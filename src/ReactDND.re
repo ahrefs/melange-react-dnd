@@ -7,3 +7,5 @@ module DropTarget = DropTarget;
 module DragDropContext = DragDropContext;
 
 module DragDropContextProvider = DragDropContextProvider;
+
+module Backend = Backend;
