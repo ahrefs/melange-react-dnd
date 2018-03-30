@@ -22,12 +22,7 @@ module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
       [@bs.meth] (unit => Js.nullable(coordinates)),
     "getSourceClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
   };
-  type t = {
-    .
-    "drop": (Config.props, monitor, ReasonReact.reactRef) => Config.dropItem,
-    "hover": (Config.props, monitor, ReasonReact.reactRef) => unit,
-    "canDrop": (Config.props, monitor) => bool,
-  };
+  type t;
   [@bs.obj]
   external make :
     (

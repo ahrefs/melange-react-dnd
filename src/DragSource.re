@@ -26,14 +26,7 @@ module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
       [@bs.meth] (unit => Js.nullable(coordinates)),
     "getSourceClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
   };
-  type t = {
-    .
-    "beginDrag":
-      (Config.props, monitor, ReasonReact.reactRef) => Config.dragItem,
-    "endDrag": (Config.props, monitor, ReasonReact.reactRef) => unit,
-    "canDrag": (Config.props, monitor) => bool,
-    "isDragging": (Config.props, monitor) => bool,
-  };
+  type t;
   [@bs.obj]
   external make :
     (
