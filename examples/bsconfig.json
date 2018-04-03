@@ -1,5 +1,6 @@
 {
   "name": "bs-react-dnd-examples",
+  "namespace": true,
   "sources": ["src"],
   "bs-dependencies": ["reason-react", "bs-jest", "bs-react-dnd", "rationale"],
   "reason": {

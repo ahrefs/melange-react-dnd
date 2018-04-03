@@ -1,5 +1,7 @@
 module RList = Rationale.RList;
 
+module DnD = BsReactDnd;
+
 type action =
   | MoveCard(int, int);
 
@@ -41,7 +43,7 @@ let make = _children => {
       };
     },
   render: self =>
-    <ReactDND.DragDropContextProvider backend=Backend.html5>
+    <DnD.DragDropContextProvider backend=DnD.Backend.html5>
       <div style=(ReactDOMRe.Style.make(~width="400", ()))>
         (
           self.state.cards
@@ -60,5 +62,5 @@ let make = _children => {
           |> ReasonReact.arrayToElement
         )
       </div>
-    </ReactDND.DragDropContextProvider>,
+    </DnD.DragDropContextProvider>,
 };
