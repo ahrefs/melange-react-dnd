@@ -11,7 +11,7 @@ Feel free to create an issue or PR.
 ## Installation, [npm](https://www.npmjs.com/package/@ahrefs/bs-react-dnd)
 
 ```sh
-npm install --save bs-react-dnd
+npm install --save @ahrefs/bs-react-dnd
 ```
 
 Then add `bs-react-dnd` to `bs-dependencies` in your `bsconfig.json`:
