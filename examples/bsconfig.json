@@ -2,7 +2,7 @@
   "name": "@ahrefs/bs-react-dnd-examples",
   "namespace": true,
   "sources": ["src"],
-  "bs-dependencies": ["reason-react", "bs-jest", "@ahrefs/bs-react-dnd", "rationale"],
+  "bs-dependencies": ["reason-react", "@ahrefs/bs-react-dnd", "rationale"],
   "reason": {
     "react-jsx": 2
   },

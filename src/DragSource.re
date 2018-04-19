@@ -17,7 +17,7 @@ module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
     "getItemType": [@bs.meth] (unit => Js.nullable(Core.itemType)),
     "getItem": [@bs.meth] (unit => Js.nullable(Config.dragItem)),
     "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dropItem)),
-    "didDrop": [@bs.meth] (unit => Js.boolean),
+    "didDrop": [@bs.meth] (unit => bool),
     "getInitialClientOffset": [@bs.meth] (unit => Js.nullable(coordinates)),
     "getInitialSourceClientOffset":
       [@bs.meth] (unit => Js.nullable(coordinates)),

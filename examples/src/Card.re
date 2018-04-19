@@ -71,7 +71,7 @@ module DragSourceWrapper =
       let collect: collect =
         (connect, monitor) => {
           "connectDragSource": connect##dragSource(),
-          "isDragging": Js.to_bool(monitor##isDragging()),
+          "isDragging": monitor##isDragging(),
         };
     },
   );
