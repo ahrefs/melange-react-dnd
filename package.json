@@ -1,6 +1,6 @@
 {
-  "name": "bs-react-dnd",
-  "version": "2.0.0",
+  "name": "@ahrefs/bs-react-dnd",
+  "version": "0.0.1",
   "description": "Reason bindings for react-dnd",
   "author": "ahrefs",
   "license": "MIT",

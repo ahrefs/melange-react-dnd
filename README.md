@@ -4,11 +4,11 @@
 
 ## Status
 
-🚧 Not everything is supported yet. 🚧
+🚧 Not everything is supported yet; Unstable; Doesn't follow semver; 🚧
 
 Feel free to create an issue or PR.
 
-## Installation
+## Installation, [npm](https://www.npmjs.com/package/@ahrefs/bs-react-dnd)
 
 ```sh
 npm install --save bs-react-dnd

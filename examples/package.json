@@ -1,6 +1,6 @@
 {
-  "name": "bs-react-dnd-examples",
-  "version": "0.1.0",
+  "name": "@ahrefs/bs-react-dnd-examples",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "rationale": "^0.1.3",
