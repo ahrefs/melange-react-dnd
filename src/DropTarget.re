@@ -8,8 +8,8 @@ type connector = {. "dropTarget": [@bs.meth] (unit => wrapper)};
 module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
   type monitor = {
     .
-    "canDrop": [@bs.meth] (unit => Js.boolean),
-    "isOver": [@bs.meth] ({. "shallow": Js.boolean} => Js.boolean),
+    "canDrop": [@bs.meth] (unit => bool),
+    "isOver": [@bs.meth] ({. "shallow": bool} => bool),
     "getItemType": [@bs.meth] (unit => Js.nullable(Core.itemType)),
     "getItem": [@bs.meth] (unit => Js.nullable(Config.dragItem)),
     "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dropItem)),

@@ -35,6 +35,7 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "reason-react": "^0.3.2"
+    "bs-platform": "^3.0.0",
+    "reason-react": "^0.3.4"
   }
 }

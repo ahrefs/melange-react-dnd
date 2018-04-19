@@ -12,8 +12,8 @@ type connector = {
 module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
   type monitor = {
     .
-    "canDrag": [@bs.meth] (unit => Js.boolean),
-    "isDragging": [@bs.meth] (unit => Js.boolean),
+    "canDrag": [@bs.meth] (unit => bool),
+    "isDragging": [@bs.meth] (unit => bool),
     "getItemType": [@bs.meth] (unit => Js.nullable(Core.itemType)),
     "getItem": [@bs.meth] (unit => Js.nullable(Config.dragItem)),
     "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dropItem)),
