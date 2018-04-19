@@ -14,12 +14,12 @@ Feel free to create an issue or PR.
 npm install --save @ahrefs/bs-react-dnd
 ```
 
-Then add `bs-react-dnd` to `bs-dependencies` in your `bsconfig.json`:
+Then add `@ahrefs/bs-react-dnd` to `bs-dependencies` in your `bsconfig.json`:
 
 ```js
 {
   ...
-  "bs-dependencies": ["bs-react-dnd"]
+  "bs-dependencies": ["@ahrefs/bs-react-dnd"]
 }
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "bs-react-dnd",
+  "name": "@ahrefs/bs-react-dnd",
   "namespace": true,
   "sources": ["src"],
   "bs-dependencies": ["reason-react"],

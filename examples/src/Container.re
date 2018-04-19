@@ -1,6 +1,6 @@
 module RList = Rationale.RList;
 
-module DnD = BsReactDnd;
+module DnD = AhrefsBsReactDnd;
 
 type action =
   | MoveCard(int, int);

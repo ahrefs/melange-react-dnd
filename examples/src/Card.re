@@ -1,4 +1,4 @@
-module DnD = BsReactDnd;
+module DnD = AhrefsBsReactDnd;
 
 module DropTargetSpec =
   DnD.DropTarget.MakeSpec(
