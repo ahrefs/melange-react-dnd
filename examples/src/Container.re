@@ -57,7 +57,7 @@ let make = _children => {
                />
              )
           |> Array.of_list
-          |> ReasonReact.arrayToElement
+          |> ReasonReact.array
         )
       </div>
     </BsReactDnd.DragDropContextProvider>,

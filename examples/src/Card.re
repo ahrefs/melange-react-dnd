@@ -102,7 +102,7 @@ let make = (~id, ~text, ~moveCard, _children) => {
                                 (),
                               )
                             )>
-                            (ReasonReact.stringToElement(text))
+                            (ReasonReact.string(text))
                           </div>,
                         ),
                       )
