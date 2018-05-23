@@ -1,7 +1,7 @@
 /* DropTarget
  * https://react-dnd.github.io/react-dnd/docs-drop-target.html
  */
-open Core;
+open BsReactDnd__Utils;
 
 type connector = {. "dropTarget": [@bs.meth] (unit => wrapper)};
 
@@ -10,7 +10,7 @@ module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
     .
     "canDrop": [@bs.meth] (unit => bool),
     "isOver": [@bs.meth] ({. "shallow": bool} => bool),
-    "getItemType": [@bs.meth] (unit => Js.nullable(Core.itemType)),
+    "getItemType": [@bs.meth] (unit => Js.nullable(itemType)),
     "getItem": [@bs.meth] (unit => Js.nullable(Config.dragItem)),
     "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dropItem)),
     "didDrop": [@bs.meth] (unit => bool),

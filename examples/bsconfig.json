@@ -1,6 +1,5 @@
 {
   "name": "@ahrefs/bs-react-dnd-examples",
-  "namespace": true,
   "sources": ["src"],
   "bs-dependencies": ["reason-react", "@ahrefs/bs-react-dnd", "rationale"],
   "reason": {

@@ -1,7 +1,5 @@
-module DnD = AhrefsBsReactDnd;
-
 module DropTargetSpec =
-  DnD.DropTarget.MakeSpec(
+  BsReactDnd.DropTarget.MakeSpec(
     {
       type dragItem = T.dragItem;
       type dropItem = T.dropItem;
@@ -14,7 +12,7 @@ module DropTargetSpec =
   );
 
 module DropTargetWrapper =
-  DnD.DropTarget.Make(
+  BsReactDnd.DropTarget.Make(
     {
       let itemType = T.itemType;
       type spec = DropTargetSpec.t;
@@ -34,16 +32,17 @@ module DropTargetWrapper =
             },
           (),
         );
-      type collectedProps = {. "connectDropTarget": DnD.Core.wrapper};
+      type collectedProps = {. "connectDropTarget": BsReactDnd.Utils.wrapper};
       type collect =
-        (DnD.DropTarget.connector, DropTargetSpec.monitor) => collectedProps;
+        (BsReactDnd.DropTarget.connector, DropTargetSpec.monitor) =>
+        collectedProps;
       let collect: collect =
         (connect, _) => {"connectDropTarget": connect##dropTarget()};
     },
   );
 
 module DragSourceSpec =
-  DnD.DragSource.MakeSpec(
+  BsReactDnd.DragSource.MakeSpec(
     {
       type dragItem = T.dragItem;
       type dropItem = T.dropItem;
@@ -52,7 +51,7 @@ module DragSourceSpec =
   );
 
 module DragSourceWrapper =
-  DnD.DragSource.Make(
+  BsReactDnd.DragSource.Make(
     {
       let itemType = T.itemType;
       type spec = DragSourceSpec.t;
@@ -63,11 +62,12 @@ module DragSourceWrapper =
         );
       type collectedProps = {
         .
-        "connectDragSource": DnD.Core.wrapper,
+        "connectDragSource": BsReactDnd.Utils.wrapper,
         "isDragging": bool,
       };
       type collect =
-        (DnD.DragSource.connector, DragSourceSpec.monitor) => collectedProps;
+        (BsReactDnd.DragSource.connector, DragSourceSpec.monitor) =>
+        collectedProps;
       let collect: collect =
         (connect, monitor) => {
           "connectDragSource": connect##dragSource(),

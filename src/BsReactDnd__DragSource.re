@@ -1,7 +1,7 @@
 /* DragSource
  * https://react-dnd.github.io/react-dnd/docs-drag-source.html
  */
-open Core;
+open BsReactDnd__Utils;
 
 type connector = {
   .
@@ -14,7 +14,7 @@ module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
     .
     "canDrag": [@bs.meth] (unit => bool),
     "isDragging": [@bs.meth] (unit => bool),
-    "getItemType": [@bs.meth] (unit => Js.nullable(Core.itemType)),
+    "getItemType": [@bs.meth] (unit => Js.nullable(itemType)),
     "getItem": [@bs.meth] (unit => Js.nullable(Config.dragItem)),
     "getDropResult": [@bs.meth] (unit => Js.nullable(Config.dropItem)),
     "didDrop": [@bs.meth] (unit => bool),
