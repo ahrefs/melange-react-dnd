@@ -3,10 +3,41 @@
  */
 open BsReactDnd__Utils;
 
+type dragPreviewOptions = {
+  .
+  "captureDraggingState": Js.undefined(bool),
+  "anchorX": Js.undefined(float),
+  "anchorY": Js.undefined(float),
+  "offsetX": Js.undefined(int),
+  "offsetY": Js.undefined(int),
+};
+
+let makeDragPreviewOptions =
+    (
+      ~captureDraggingState=?,
+      ~anchorX=?,
+      ~anchorY=?,
+      ~offsetX=?,
+      ~offsetY=?,
+      (),
+    )
+    : dragPreviewOptions => {
+  "captureDraggingState": captureDraggingState |. Js.Undefined.fromOption,
+  "anchorX": anchorX |. Js.Undefined.fromOption,
+  "anchorY": anchorY |. Js.Undefined.fromOption,
+  "offsetX": offsetX |. Js.Undefined.fromOption,
+  "offsetY": offsetY |. Js.Undefined.fromOption,
+};
+
+type dragPreview =
+  [@bs.meth] (
+    (ReasonReact.reactElement, dragPreviewOptions) => ReasonReact.reactElement
+  );
+
 type connector = {
   .
   "dragSource": [@bs.meth] (unit => wrapper),
-  "dragPreview": [@bs.meth] (unit => wrapper),
+  "dragPreview": [@bs.meth] (unit => dragPreview),
 };
 
 module MakeSpec = (Config: {type props; type dragItem; type dropItem;}) => {
@@ -73,6 +104,7 @@ module Make =
   /* Wrap JS class with 'react-dnd' */
   let enhanced =
     dragSource(Config.itemType, Config.spec, Config.collect, jsComponent);
+
   /* Convert JS => Reason */
   let make = (~props=Js.Obj.empty(), children: children) =>
     ReasonReact.wrapJsForReason(~reactClass=enhanced, ~props, children);

@@ -12,6 +12,7 @@
 # bucklescript
 /lib
 /types
+/src/*.js
 .merlin
 .bsb.lock
 
