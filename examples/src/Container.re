@@ -1,4 +1,5 @@
 module RList = Rationale.RList;
+open Belt;
 
 type action =
   | MoveCard(int, int);
@@ -30,35 +31,36 @@ let make = _children => {
       Js.log3("ID:", dragId, hoverId);
       switch (dragIndex, hoverIndex) {
       | (Some(dragIndex), Some(hoverIndex)) =>
-        let card = List.nth(state.cards, dragIndex);
+        let card = List.getExn(state.cards, dragIndex);
         ReasonReact.Update({
           cards:
             state.cards
-            |> RList.remove(dragIndex, 1)
-            |> RList.insert(hoverIndex, card),
+            ->RList.remove(dragIndex, 1, _)
+            ->RList.insert(hoverIndex, card, _),
         });
       | (_, _) => ReasonReact.NoUpdate
       };
     },
-  render: self =>
+  render: self => {
     <BsReactDnd.DragDropContextProvider backend=BsReactDnd.Backend.html5>
-      <div style=(ReactDOMRe.Style.make(~width="400", ()))>
-        (
-          self.state.cards
-          |> List.map((card: T.card) =>
-               <Card
-                 key=(string_of_int(card.id))
-                 id=card.id
-                 text=card.text
-                 moveCard=(
-                   (dragIndex, hoverIndex) =>
-                     self.send(MoveCard(dragIndex, hoverIndex))
-                 )
-               />
-             )
-          |> Array.of_list
-          |> ReasonReact.array
-        )
+      <div style={ReactDOMRe.Style.make(~width="400", ())}>
+        self.state.cards
+        ->(
+            List.map((card: T.card) =>
+              <Card
+                key={string_of_int(card.id)}
+                id={card.id}
+                text={card.text}
+                moveCard={
+                  (dragIndex, hoverIndex) =>
+                    self.send(MoveCard(dragIndex, hoverIndex))
+                }
+              />
+            )
+          )
+        ->List.toArray
+        ->ReasonReact.array
       </div>
-    </BsReactDnd.DragDropContextProvider>,
+    </BsReactDnd.DragDropContextProvider>;
+  },
 };

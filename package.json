@@ -29,13 +29,13 @@
     "bs:setup": "bsb -make-world"
   },
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dnd": "^2.5.4",
-    "react-dnd-html5-backend": "^2.5.4",
-    "react-dom": "^16.2.0"
+    "react": "^16.7.0",
+    "react-dnd": "^7.0.2",
+    "react-dnd-html5-backend": "^7.0.2",
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
-    "bs-platform": "^3.0.0",
-    "reason-react": "^0.4.1"
+    "bs-platform": "^4.0.18",
+    "reason-react": "^0.5.3"
   }
 }

@@ -1,3 +1,3 @@
 type t;
 
-[@bs.module] external html5 : t = "react-dnd-html5-backend";
+[@bs.module "react-dnd-html5-backend"] external html5: t = "default";
