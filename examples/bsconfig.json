@@ -18,7 +18,6 @@
   "refmt": 3,
   "bs-dependencies": [
     "reason-react",
-    "@ahrefs/bs-react-dnd",
-    "rationale"
+    "@ahrefs/bs-react-dnd"
   ]
 }
