@@ -1,5 +1,23 @@
 open Belt;
 
+// Return copy of given array, switching the elements at the given positions
+let switchElements = (array, i, j) =>
+  i == j ?
+    array :
+    (
+      switch (array->Array.get(i), array->Array.get(j)) {
+      | (Some(ei), Some(ej)) =>
+        array->Array.mapWithIndex((index, v) =>
+          switch (index) {
+          | index when index == i => ej
+          | index when index == j => ei
+          | _ => v
+          }
+        )
+      | _ => array
+      }
+    );
+
 type action =
   | MoveCard(int, int)
   | DropCard(int);
@@ -31,24 +49,9 @@ let make = _children => {
 
       Js.log3("MoveCard:", dragIndex, hoverIndex);
 
-      switch (dragIndex, hoverIndex) {
-      | ((-1), _)
-      | (_, (-1)) => ReasonReact.NoUpdate
-      | (dragIndex, hoverIndex) =>
-        let dragCard = cards->Array.getExn(dragIndex);
-        let hoverCard = cards->Array.getExn(hoverIndex);
-        ReasonReact.Update({
-          cards:
-            state.cards
-            ->Array.mapWithIndex((i, card) =>
-                switch (i) {
-                | i when i == dragIndex => hoverCard
-                | i when i == hoverIndex => dragCard
-                | _ => card
-                }
-              ),
-        });
-      };
+      ReasonReact.Update({
+        cards: state.cards->switchElements(dragIndex, hoverIndex),
+      });
     | DropCard(id) =>
       ReasonReact.SideEffects(
         _ =>
