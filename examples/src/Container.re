@@ -1,7 +1,8 @@
 open Belt;
 
 type action =
-  | MoveCard(int, int);
+  | MoveCard(int, int)
+  | DropCard(int);
 
 type state = {cards: array(T.card)};
 
@@ -48,6 +49,14 @@ let make = _children => {
               ),
         });
       };
+    | DropCard(id) =>
+      ReasonReact.SideEffects(
+        _ =>
+          state.cards
+          ->Js.Array.find(card => card.T.id == id, _)
+          ->Option.map(card => Js.log2("DropCard", card))
+          ->ignore,
+      )
     },
   render: ({state, send}) => {
     <BsReactDnd.DragDropContextProvider backend=BsReactDnd.Backend.html5>
@@ -61,6 +70,7 @@ let make = _children => {
                moveCard={(dragIndex, hoverIndex) =>
                  send(MoveCard(dragIndex, hoverIndex))
                }
+               dropCard={id => send(DropCard(id))}
              />
            )
          ->ReasonReact.array}

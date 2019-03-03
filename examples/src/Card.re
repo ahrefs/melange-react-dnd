@@ -1,3 +1,5 @@
+open Belt;
+
 module DropTargetSpec =
   BsReactDnd.DropTarget.MakeSpec({
     type dragItem = T.dragItem;
@@ -6,6 +8,7 @@ module DropTargetSpec =
       .
       "id": int,
       "moveCard": [@bs.meth] ((int, int) => unit),
+      "dropCard": [@bs.meth] (int => unit),
     };
   });
 
@@ -26,6 +29,14 @@ module DropTargetWrapper =
             | Some(_)
             | None => ()
             };
+          },
+        ~drop=
+          (props, monitor, _component) => {
+            let dragItem = monitor##getItem() |> Js.toOption;
+            dragItem
+            ->Option.map(dragItem => props##dropCard(dragItem##id))
+            ->ignore;
+            Js.Dict.empty();
           },
         (),
       );
@@ -70,11 +81,12 @@ module DragSourceWrapper =
 
 let component = ReasonReact.statelessComponent("Card");
 
-let make = (~id, ~text, ~moveCard, _children) => {
+let make = (~id, ~text, ~moveCard, ~dropCard, _children) => {
   ...component,
   render: _self =>
     /* need to be very carefull when passing `props` isn't annotated, this has to be the same as DragSourceSpec.props */
-    <DropTargetWrapper props={"id": id, "moveCard": moveCard}>
+    <DropTargetWrapper
+      props={"id": id, "moveCard": moveCard, "dropCard": dropCard}>
       ...{(~collectedProps as dropTarget) =>
         <DragSourceWrapper props={"id": id}>
           ...{(~collectedProps as dragSource) =>
