@@ -1,9 +1,15 @@
 open Belt;
 
+let itemTypeName = "card";
+
+type dragItem = {. "id": int};
+
+type dropItem = Js.Dict.t(unit);
+
 module DropTargetSpec =
   BsReactDnd.DropTarget.MakeSpec({
-    type dragItem = T.dragItem;
-    type dropItem = T.dropItem;
+    type nonrec dragItem = dragItem;
+    type nonrec dropItem = dropItem;
     type props = {
       .
       "id": int,
@@ -14,7 +20,7 @@ module DropTargetSpec =
 
 module DropTargetWrapper =
   BsReactDnd.DropTarget.Make({
-    let itemType = T.itemType;
+    let itemType = itemTypeName;
     type spec = DropTargetSpec.t;
     let spec: spec =
       DropTargetSpec.make(
@@ -50,14 +56,14 @@ module DropTargetWrapper =
 
 module DragSourceSpec =
   BsReactDnd.DragSource.MakeSpec({
-    type dragItem = T.dragItem;
-    type dropItem = T.dropItem;
+    type nonrec dragItem = dragItem;
+    type nonrec dropItem = dropItem;
     type props = {. "id": int};
   });
 
 module DragSourceWrapper =
   BsReactDnd.DragSource.Make({
-    let itemType = T.itemType;
+    let itemType = itemTypeName;
     type spec = DragSourceSpec.t;
     let spec: spec =
       DragSourceSpec.make(
