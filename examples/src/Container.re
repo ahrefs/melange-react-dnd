@@ -20,7 +20,7 @@ let switchElements = (array, i, j) =>
 
 type action =
   | MoveCard(int, int)
-  | DropCard(int);
+  | DropCard(int, int);
 
 type state = {cards: array(T.card)};
 
@@ -52,28 +52,38 @@ let make = _children => {
       ReasonReact.Update({
         cards: state.cards->switchElements(dragIndex, hoverIndex),
       });
-    | DropCard(id) =>
+    | DropCard(id, startIndex) =>
       ReasonReact.SideEffects(
-        _ =>
-          state.cards
-          ->Js.Array.find(card => card.T.id == id, _)
-          ->Option.map(card => Js.log2("DropCard", card))
-          ->ignore,
+        _ => {
+          let currentIndex =
+            state.cards |> Js.Array.findIndex(card => card.T.id == id);
+          if (startIndex == currentIndex) {
+            Js.log("Card was dropped into old position!");
+          } else {
+            state.cards
+            ->Array.get(currentIndex)
+            ->Option.map(card =>
+                Js.log2("Card was dropped into new position:", card)
+              )
+            ->ignore;
+          };
+        },
       )
     },
   render: ({state, send}) => {
     <BsReactDnd.DragDropContextProvider backend=BsReactDnd.Backend.html5>
       <div style={ReactDOMRe.Style.make(~width="400", ())}>
         {state.cards
-         ->Array.map(card =>
+         ->Array.mapWithIndex((index, card) =>
              <Card
                key={string_of_int(card.id)}
                id={card.id}
                text={card.text}
+               index
                moveCard={(dragIndex, hoverIndex) =>
                  send(MoveCard(dragIndex, hoverIndex))
                }
-               dropCard={id => send(DropCard(id))}
+               dropCard={(id, startIndex) => send(DropCard(id, startIndex))}
              />
            )
          ->ReasonReact.array}

@@ -3,7 +3,11 @@ open Belt;
 module Dnd = {
   let itemTypeId = "card";
 
-  type dragItem = {. "id": int};
+  type dragItem = {
+    .
+    "id": int,
+    "startIndex": int,
+  };
 
   type dropItem = Js.Dict.t(unit);
 };
@@ -16,7 +20,7 @@ module DropTargetSpec =
       .
       "id": int,
       "moveCard": [@bs.meth] ((int, int) => unit),
-      "dropCard": [@bs.meth] (int => unit),
+      "dropCard": [@bs.meth] ((int, int) => unit),
     };
   });
 
@@ -42,7 +46,9 @@ module DropTargetWrapper =
           (props, monitor, _component) => {
             let dragItem = monitor##getItem() |> Js.toOption;
             dragItem
-            ->Option.map(dragItem => props##dropCard(dragItem##id))
+            ->Option.map(dragItem =>
+                props##dropCard(dragItem##id, dragItem##startIndex)
+              )
             ->ignore;
             Js.Dict.empty();
           },
@@ -60,7 +66,7 @@ module DragSourceSpec =
   BsReactDnd.DragSource.MakeSpec({
     type dragItem = Dnd.dragItem;
     type dropItem = Dnd.dropItem;
-    type props = {. "id": int};
+    type props = Dnd.dragItem;
   });
 
 module DragSourceWrapper =
@@ -69,7 +75,9 @@ module DragSourceWrapper =
     type spec = DragSourceSpec.t;
     let spec: spec =
       DragSourceSpec.make(
-        ~beginDrag=(props, _, _) => {"id": props##id},
+        ~beginDrag=
+          (props, _, _) =>
+            {"id": props##id, "startIndex": props##startIndex},
         (),
       );
     type collectedProps = {
@@ -91,14 +99,14 @@ module DragSourceWrapper =
 
 let component = ReasonReact.statelessComponent("Card");
 
-let make = (~id, ~text, ~moveCard, ~dropCard, _children) => {
+let make = (~id, ~text, ~index, ~moveCard, ~dropCard, _children) => {
   ...component,
   render: _self =>
     /* need to be very carefull when passing `props` isn't annotated, this has to be the same as DragSourceSpec.props */
     <DropTargetWrapper
       props={"id": id, "moveCard": moveCard, "dropCard": dropCard}>
       ...{(~collectedProps as dropTarget) =>
-        <DragSourceWrapper props={"id": id}>
+        <DragSourceWrapper props={"id": id, "startIndex": index}>
           ...{(~collectedProps as dragSource) =>
             dropTarget##connectDropTarget(
               dragSource##connectDragPreview(
@@ -119,7 +127,7 @@ let make = (~id, ~text, ~moveCard, ~dropCard, _children) => {
                   {dragSource##connectDragSource(
                      <div
                        style={ReactDOMRe.Style.make(
-                         ~cursor="move",
+                         ~cursor=dragSource##isDragging ? "grabbing" : "grab",
                          ~borderRadius="5px",
                          ~width="14px",
                          ~height="14px",
