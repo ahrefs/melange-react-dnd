@@ -1,15 +1,17 @@
 open Belt;
 
-let itemTypeName = "card";
+module Dnd = {
+  let itemTypeId = "card";
 
-type dragItem = {. "id": int};
+  type dragItem = {. "id": int};
 
-type dropItem = Js.Dict.t(unit);
+  type dropItem = Js.Dict.t(unit);
+};
 
 module DropTargetSpec =
   BsReactDnd.DropTarget.MakeSpec({
-    type nonrec dragItem = dragItem;
-    type nonrec dropItem = dropItem;
+    type dragItem = Dnd.dragItem;
+    type dropItem = Dnd.dropItem;
     type props = {
       .
       "id": int,
@@ -20,7 +22,7 @@ module DropTargetSpec =
 
 module DropTargetWrapper =
   BsReactDnd.DropTarget.Make({
-    let itemType = itemTypeName;
+    let itemType = Dnd.itemTypeId;
     type spec = DropTargetSpec.t;
     let spec: spec =
       DropTargetSpec.make(
@@ -56,14 +58,14 @@ module DropTargetWrapper =
 
 module DragSourceSpec =
   BsReactDnd.DragSource.MakeSpec({
-    type nonrec dragItem = dragItem;
-    type nonrec dropItem = dropItem;
+    type dragItem = Dnd.dragItem;
+    type dropItem = Dnd.dropItem;
     type props = {. "id": int};
   });
 
 module DragSourceWrapper =
   BsReactDnd.DragSource.Make({
-    let itemType = itemTypeName;
+    let itemType = Dnd.itemTypeId;
     type spec = DragSourceSpec.t;
     let spec: spec =
       DragSourceSpec.make(
@@ -73,6 +75,7 @@ module DragSourceWrapper =
     type collectedProps = {
       .
       "connectDragSource": BsReactDnd.Utils.wrapper,
+      "connectDragPreview": BsReactDnd.DragSource.dragPreview,
       "isDragging": bool,
     };
     type collect =
@@ -81,6 +84,7 @@ module DragSourceWrapper =
     let collect: collect =
       (connect, monitor) => {
         "connectDragSource": connect##dragSource(),
+        "connectDragPreview": connect##dragPreview(),
         "isDragging": monitor##isDragging(),
       };
   });
@@ -97,9 +101,10 @@ let make = (~id, ~text, ~moveCard, ~dropCard, _children) => {
         <DragSourceWrapper props={"id": id}>
           ...{(~collectedProps as dragSource) =>
             dropTarget##connectDropTarget(
-              dragSource##connectDragSource(
+              dragSource##connectDragPreview(
                 <div
                   style={ReactDOMRe.Style.make(
+                    ~display="flex",
                     ~border=
                       Printf.sprintf(
                         "1px %s gray",
@@ -108,12 +113,25 @@ let make = (~id, ~text, ~moveCard, ~dropCard, _children) => {
                     ~padding="0.5rem 1rem",
                     ~marginBottom=".5rem",
                     ~backgroundColor="white",
-                    ~cursor="move",
                     ~opacity=dragSource##isDragging ? "0" : "1",
                     (),
                   )}>
+                  {dragSource##connectDragSource(
+                     <div
+                       style={ReactDOMRe.Style.make(
+                         ~cursor="move",
+                         ~borderRadius="5px",
+                         ~width="14px",
+                         ~height="14px",
+                         ~marginRight="0.5rem",
+                         ~backgroundColor="lightsalmon",
+                         (),
+                       )}
+                     />,
+                   )}
                   {ReasonReact.string(text)}
                 </div>,
+                BsReactDnd.DragSource.makeDragPreviewOptions(),
               ),
             )
           }
