@@ -5,7 +5,7 @@ const outputDir = path.join(__dirname, 'build/');
 const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  entry: './src/Index.bs.js',
+  entry: './examples/sortable/index.bs.js',
   mode: isProd ? 'production' : 'development',
   output: {
     path: outputDir,
@@ -13,13 +13,15 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'examples/sortable/index.html',
       inject: false
     })
   ],
   devServer: {
     compress: true,
-    contentBase: outputDir,
+    static: {
+      directory: outputDir,
+    },
     port: process.env.PORT || 8000,
     historyApiFallback: true
   }

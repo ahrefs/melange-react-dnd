@@ -1,9 +1,15 @@
 {
   "name": "@ahrefs/bs-react-dnd",
-  "sources": {
-    "dir": "src",
-    "subdirs": true
-  },
+  "sources": [
+    {
+      "dir": "examples",
+      "subdirs": true
+    },
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
   "package-specs": [
     {
       "module": "es6",
@@ -13,10 +19,12 @@
   "suffix": ".bs.js",
   "namespace": false,
   "reason": {
-    "react-jsx": 2
+    "react-jsx": 3
   },
   "refmt": 3,
   "bs-dependencies": [
+    "bs-webapi",
+    "rationale",
     "reason-react"
   ]
 }

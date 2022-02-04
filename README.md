@@ -34,7 +34,7 @@ Please take a look at [examples](https://github.com/ahrefs/bs-react-dnd/tree/mas
 To run demo:
 
 ```sh
-$ cd examples
 $ npm install
-$ npm start
+$ npm run bs:build
+$ npm run server
 ```

@@ -1,6 +1,12 @@
+## 1.0.0 (Feb 04, 2022)
+
+- Using of react-dnd hooks
+- Update example
+- Upgrade bs-platform, react-dnd, reason-react version
+ 
 ## 0.0.8 (Jan 29, 2019)
 
-- Upgrade bs-platform, react-dnd, rason-react version
+- Upgrade bs-platform, react-dnd, reason-react version
 
 ## 0.0.1 (Apr 19, 2018)
 
