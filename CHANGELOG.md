@@ -1,3 +1,7 @@
+## 1.0.1 (Feb 07, 2022)
+
+- Using mutable binding instead of ref
+
 ## 1.0.0 (Feb 04, 2022)
 
 - Using of react-dnd hooks

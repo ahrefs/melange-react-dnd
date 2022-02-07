@@ -12,7 +12,7 @@ module DndProvider = {
 
 type useDragItemProps('id) = {
   id: 'id,
-  index: ref(int),
+  mutable index: int,
 };
 
 type useDragCollectedProps = {isDragging: bool};

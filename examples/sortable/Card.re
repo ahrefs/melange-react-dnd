@@ -10,7 +10,7 @@ let make = (~id, ~text, ~fixed, ~index, ~moveCard) => {
         elementRef.current
         ->Js.toOption
         ->Belt.Option.forEach(el => {
-            let dragIndex = item.index^;
+            let dragIndex = item.index;
             let hoverIndex = index;
 
             if (dragIndex != hoverIndex) {
@@ -38,7 +38,7 @@ let make = (~id, ~text, ~fixed, ~index, ~moveCard) => {
               } else if (monitor##canDrop()) {
                 moveCard(dragIndex, hoverIndex);
 
-                item.index := hoverIndex;
+                item.index = hoverIndex;
               };
             };
           });
@@ -50,7 +50,7 @@ let make = (~id, ~text, ~fixed, ~index, ~moveCard) => {
       type_: T.itemType,
       item: {
         id,
-        index: ref(index),
+        index,
       },
       canDrag: _ => !fixed,
       collect: monitor => {
