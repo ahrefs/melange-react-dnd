@@ -3,7 +3,8 @@
   "sources": [
     {
       "dir": "examples",
-      "subdirs": true
+      "subdirs": true,
+      "type" : "dev"
     },
     {
       "dir": "src",
