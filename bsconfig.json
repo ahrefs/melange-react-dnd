@@ -25,6 +25,7 @@
   "bs-dependencies": [
     "bs-webapi",
     "rationale",
-    "reason-react"
+    "reason-react",
+    "reshowcase"
   ]
 }
