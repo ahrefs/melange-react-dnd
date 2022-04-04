@@ -24,9 +24,11 @@
   },
   "refmt": 3,
   "bs-dependencies": [
+    "reason-react"
+  ],
+  "bs-dev-dependencies": [
     "bs-webapi",
     "rationale",
-    "reason-react",
     "reshowcase"
   ]
 }
