@@ -33,8 +33,6 @@ Then add `@ahrefs/bs-react-dnd` to `bs-dependencies` in your `bsconfig.json`:
 Please take a look at [examples](https://github.com/ahrefs/bs-react-dnd/tree/master/examples).
 To run demo:
 
-```sh
-$ npm install
-$ npm run bs:build
-$ npm run server
-```
+Run `yarn start` for bucklescript compiler watcher.
+Then run `yarn start:reshowcase` which will start on `localhost:9001`.
+
