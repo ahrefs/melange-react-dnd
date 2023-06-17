@@ -1,0 +1,6 @@
+(melange.emit
+ (target tests)
+ (libraries reason-react reactDnd melange-webapi)
+ (module_systems es6)
+ (preprocess
+  (pps melange.ppx reactjs-jsx-ppx)))

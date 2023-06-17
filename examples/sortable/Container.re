@@ -1,6 +1,40 @@
 open Belt;
 
-module RList = Rationale.RList;
+module RList = {
+  // From https://github.com/jonlaing/rationale/blob/06a48fd39b106319a4a4477e90777db51c915353/src/RList.re
+  let append = (a, xs) => Stdlib.List.append(xs, [a]);
+  let concat = (xs, ys) => Stdlib.List.append(ys, xs);
+  let take = {
+    let rec loop = (i, xs, acc) =>
+      switch (i, xs) {
+      | (i, _) when i <= 0 => acc
+      | (_, []) => acc
+      | (i, [a, ...b]) => loop(i - 1, b, append(a, acc))
+      };
+    (i, xs) => loop(i, xs, []);
+  };
+
+  let takeLast = (i, xs) =>
+    Stdlib.List.rev(xs) |> take(i) |> Stdlib.List.rev;
+  let splitAt = (i, xs) => (
+    take(i, xs),
+    takeLast(List.length(xs) - i, xs),
+  );
+  let insert = (i, x, xs) => {
+    let (a, b) = splitAt(i, xs);
+    a |> append(x) |> concat(b);
+  };
+  let rec drop = (i, xs) =>
+    switch (i, xs) {
+    | (_, []) => []
+    | (i, _) when i <= 0 => xs
+    | (i, [_, ...b]) => drop(i - 1, b)
+    };
+  let remove = (i, n, xs) => {
+    let (a, b) = splitAt(i, xs);
+    a @ drop(n, b);
+  };
+};
 
 let initialCards: list(T.card) = [
   {id: "1", text: "Write a cool JS library", fixed: true},
@@ -24,8 +58,8 @@ let make = () => {
     );
   };
 
-  <BsReactDnd.DndProvider backend=BsReactDnd.Backend.html5>
-    <div style={ReactDOMRe.Style.make(~width="400", ())}>
+  <ReactDnd.DndProvider backend=ReactDnd.Backend.html5>
+    <div style={ReactDOM.Style.make(~width="400", ())}>
       {cards
        ->List.mapWithIndex((index, card: T.card) =>
            <Card
@@ -38,7 +72,7 @@ let make = () => {
            />
          )
        ->List.toArray
-       ->ReasonReact.array}
+       ->React.array}
     </div>
-  </BsReactDnd.DndProvider>;
+  </ReactDnd.DndProvider>;
 };

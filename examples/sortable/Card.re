@@ -3,7 +3,7 @@ let make = (~id, ~text, ~fixed, ~index, ~moveCard) => {
   let elementRef = React.useRef(Js.Nullable.null);
 
   let (_, drop) =
-    BsReactDnd.useDrop({
+    ReactDnd.useDrop({
       accept: T.itemType,
       canDrop: _ => !fixed,
       hover: (item, monitor) => {
@@ -46,7 +46,7 @@ let make = (~id, ~text, ~fixed, ~index, ~moveCard) => {
     });
 
   let (collectedProps, drag) =
-    BsReactDnd.useDrag({
+    ReactDnd.useDrag({
       type_: T.itemType,
       item: {
         id,
@@ -60,7 +60,7 @@ let make = (~id, ~text, ~fixed, ~index, ~moveCard) => {
 
   <div
     ref={elementRef->ReactDOM.Ref.domRef->drop->drag}
-    style={ReactDOMRe.Style.make(
+    style={ReactDOM.Style.make(
       ~border="1px dashed gray",
       ~padding="0.5rem 1rem",
       ~marginBottom=".5rem",
@@ -70,6 +70,6 @@ let make = (~id, ~text, ~fixed, ~index, ~moveCard) => {
       ~opacity=collectedProps.isDragging ? "0" : "1",
       (),
     )}>
-    {ReasonReact.string(text)}
+    {React.string(text)}
   </div>;
 };
