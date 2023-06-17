@@ -2,4 +2,4 @@
 
 (using melange 0.1)
 
-(name melange-react-virtualized)
+(name melange-react-dnd)
