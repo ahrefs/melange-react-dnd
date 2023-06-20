@@ -32,3 +32,5 @@ _build
 _opam
 
 .vscode/
+
+*.install
