@@ -1,0 +1,7 @@
+(library
+ (name reactDnd)
+ (public_name melange-react-dnd)
+ (modes melange)
+ (libraries reason-react)
+ (preprocess
+  (pps melange.ppx reactjs-jsx-ppx)))

@@ -1,3 +1,7 @@
+## Unreleased
+
+- Migrate to Melange
+
 ## 1.1.0 (Apr 06, 2023)
 
 - Cleanup dependencies
