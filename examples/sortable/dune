@@ -3,4 +3,4 @@
  (libraries reason-react reactDnd melange-webapi)
  (module_systems es6)
  (preprocess
-  (pps melange.ppx reactjs-jsx-ppx)))
+  (pps melange.ppx reason-react-ppx)))
