@@ -24,6 +24,8 @@ install: ## Install development dependencies
 	opam update
 	opam install -y . --deps-only
 	opam pin -y add $(project_name).dev . --working-dir
+	# needs latest melange to avoid issues with optional values in reason-react keys
+	opam pin add melange.dev -y git+https://github.com/melange-re/melange.git#d4868a5300c8c6e9f1b387aedb85ded4a705bc0a
 	# just used to build the examples
 	opam pin add melange-webapi.dev -y git+https://github.com/melange-community/melange-webapi.git#074364db83ecaff2b9ec36eef7a22dad3158b759
 
