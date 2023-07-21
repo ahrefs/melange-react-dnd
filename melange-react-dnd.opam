@@ -37,7 +37,3 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/ahrefs/melange-react-dnd.git"
-pin-depends: [
-  [ "reason-react.dev" "git+https://github.com/reasonml/reason-react#52aa51b8a0e85788f6d775b409a5594c0022691f" ]
-  [ "reason-react-ppx.dev" "git+https://github.com/reasonml/reason-react#52aa51b8a0e85788f6d775b409a5594c0022691f" ]
-]
