@@ -1,10 +1,10 @@
 module Backend = {
   type t;
-  [@bs.module "react-dnd-html5-backend"] external html5: t = "HTML5Backend";
+  [@mel.module "react-dnd-html5-backend"] external html5: t = "HTML5Backend";
 };
 
 module DndProvider = {
-  [@bs.module "react-dnd"] [@react.component]
+  [@mel.module "react-dnd"] [@react.component]
   external make:
     (~backend: Backend.t, ~children: React.element=?) => React.element =
     "DndProvider";
@@ -17,17 +17,17 @@ type useDragItemProps('id) = {
 
 type useDragCollectedProps = {isDragging: bool};
 
-type dragMonitor = {. [@bs.meth] "isDragging": unit => bool};
+type dragMonitor = {. [@mel.meth] "isDragging": unit => bool};
 
 type useDragProps('id) = {
-  [@bs.as "type"]
+  [@mel.as "type"]
   type_: string,
   item: useDragItemProps('id),
   collect: dragMonitor => useDragCollectedProps,
   canDrag: dragMonitor => bool,
 };
 
-[@bs.module "react-dnd"]
+[@mel.module "react-dnd"]
 external useDrag:
   useDragProps('id) =>
   (useDragCollectedProps, ReactDOM.domRef => ReactDOM.domRef) =
@@ -40,8 +40,8 @@ type clientOffset = {
 
 type dropMonitor = {
   .
-  [@bs.meth] "getClientOffset": unit => clientOffset,
-  [@bs.meth] "canDrop": unit => bool,
+  [@mel.meth] "getClientOffset": unit => clientOffset,
+  [@mel.meth] "canDrop": unit => bool,
 };
 
 type useDropProps('id) = {
@@ -50,7 +50,7 @@ type useDropProps('id) = {
   canDrop: dropMonitor => bool,
 };
 
-[@bs.module "react-dnd"]
+[@mel.module "react-dnd"]
 external useDrop:
   useDropProps('id) => ('b, ReactDOM.domRef => ReactDOM.domRef) =
   "useDrop";
