@@ -20,9 +20,8 @@ depends: [
   "reason-react"
   "reason-react-ppx"
   "melange-webapi" {with-test} # used to build the examples
-  "ocaml-lsp-server" {with-test} # todo: use with-dev-setup once opam 2.2 is out
-  "opam-check-npm-deps" {with-test} # todo: use with-dev-setup once opam 2.2 is out
-  "odoc" {with-doc}
+  "ocaml-lsp-server" {with-dev-setup}
+  "opam-check-npm-deps" {with-dev-setup}
 ]
 build: [
   ["dune" "subst"] {dev}
@@ -42,12 +41,4 @@ dev-repo: "git+https://github.com/ahrefs/melange-react-dnd.git"
 depexts: [
   ["react-dnd"] {npm-version = "^14.0.3"}
   ["react-dnd-html5-backend"] {npm-version = "^14.0.1"}
-]
-pin-depends: [
-  [ "melange.2.0.0"         "git+https://github.com/melange-re/melange.git#e114ad55d185badeb32b3c766c9ab547495eac1b" ]
-  [ "reason.3.10.0"         "git+https://github.com/reasonml/reason.git#972261dab3b651ff8ab9b8b9fcc32940595073dc" ]
-  [ "reason-react.dev"      "git+https://github.com/reasonml/reason-react.git#0ab8d33bd811e02f8d14e202a07ca82f4da6fb33" ]
-  [ "reason-react-ppx.dev"  "git+https://github.com/reasonml/reason-react.git#0ab8d33bd811e02f8d14e202a07ca82f4da6fb33" ]
-  [ "melange-webapi.dev"    "git+https://github.com/melange-community/melange-webapi.git#96dc1e2a867624d18050fad25cf1c71af7a098e1" ]
-  [ "melange-fetch.dev"     "git+https://github.com/melange-community/melange-fetch.git#796f941b6b85eb7e6182ac6e4f40708bfde7a9a9" ]
 ]

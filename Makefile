@@ -13,7 +13,7 @@ help: ## Print this help message
 
 .PHONY: create-switch
 create-switch: ## Create opam switch
-	opam switch create . 5.1.0~rc3 --no-install
+	opam switch create . 5.1.0 --no-install
 
 .PHONY: init
 init: create-switch install ## Configure everything to develop this repository in local
