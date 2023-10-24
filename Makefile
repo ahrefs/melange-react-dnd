@@ -57,3 +57,11 @@ serve: ## Serve the application with a local HTTP server
 .PHONY: bundle
 bundle: ## Bundle the JavaScript application
 	yarn bundle
+
+.PHONY: test
+test: ## Run the tests
+	$(DUNE) build @runtest
+
+.PHONY: test-watch
+test-watch: ## Run the tests and watch for changes
+	$(DUNE) build -w @runtest
