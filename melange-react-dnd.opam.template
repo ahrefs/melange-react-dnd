@@ -1,0 +1,4 @@
+depexts: [
+  ["react-dnd"] {npm-version = "^14.0.3"}
+  ["react-dnd-html5-backend"] {npm-version = "^14.0.1"}
+]
