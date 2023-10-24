@@ -23,6 +23,7 @@ install: ## Install development dependencies
 	yarn
 	opam update
 	opam install -y . --deps-only --with-test
+	opam install opam-check-npm-deps # todo: can remove once 2.2 is out
 	opam exec opam-check-npm-deps
 
 .PHONY: build
