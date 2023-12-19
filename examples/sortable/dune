@@ -1,4 +1,5 @@
 (melange.emit
+ (alias runtest)
  (target tests)
  (libraries reason-react reactDnd melange-webapi)
  (module_systems es6)
